@@ -27,6 +27,15 @@ alias c='clear'
 alias src='source ~/.zshrc'
 
 # Functions
+whatp () {
+  if [[ -e "yarn.lock" ]]; then echo "yarn"
+  elif [[ -e "pnpm-lock.yaml" ]]; then echo "pnpm"
+  elif [[ -e "bun.lockb" ]]; then echo "bun"
+  elif [[ -e "package-lock.json" ]]; then echo "npm"
+  else echo "Can't find lock file."
+  fi
+}
+
 pci () {
   if [[ -e "yarn.lock" ]]; then yarn install --immutable "$@"
   elif [[ -e "pnpm-lock.yaml" ]]; then pnpm install --frozen-lockfile "$@"
