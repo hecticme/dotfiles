@@ -1,5 +1,3 @@
-# Omitted some stuff in this file (e.g. nvm, pnpm).
-
 # Key bindings
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
@@ -79,6 +77,9 @@ test () {
   run test "$@"
 }
 
+# Starship prompt
+eval "$(starship init zsh)"
+
 #### ---------------------------------------
 # This is not included in my `.zshrc` anymore. But if I don't use Starship, here's how my prompt looks like:
 autoload -Uz vcs_info
@@ -90,6 +91,3 @@ zstyle ':vcs_info:git:*' formats ' (%b)'
 NEWLINE=$'\n'
 PROMPT='%B%F{blue}%1~%f%b via%F{yellow}%B${vcs_info_msg_0_}%b%f %F{green}%B@node $(node -v)%b%f %B%F{magenta}[%#]%f%b${NEWLINE}%B>%b '
 #### ---------------------------------------
-
-# Starship prompt
-eval "$(starship init zsh)"
