@@ -1,0 +1,9 @@
+[user]
+  name = ...
+  email = ...
+[core]
+  editor = vim
+[push]
+  autoSetupRemote = true
+[init]
+  defaultBranch = main
