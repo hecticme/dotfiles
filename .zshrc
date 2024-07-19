@@ -20,7 +20,6 @@ alias gcme='git commit --allow-empty'
 alias gcma='git commit --amend'
 alias gcmea='git commit --allow-empty --amend'
 alias greset='git restore . && git clean -df'
-alias ckupdate='sudo apt update && sudo apt upgrade'
 alias mouse='sudo modprobe -r hid_logitech_dj && sudo modprobe hid_logitech_dj'
 alias src='source ~/.zshrc'
 
