@@ -1,9 +1,14 @@
 [user]
   name = ...
   email = ...
+  signingKey = PATH_TO_SSH.pub
 [core]
   editor = vim
 [push]
   autoSetupRemote = true
 [init]
   defaultBranch = main
+[gpg]
+  format = ssh
+[commit]
+  gpgsign = true
