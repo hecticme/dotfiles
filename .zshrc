@@ -72,10 +72,6 @@ lintf () {
   run lint --fix "$@"
 }
 
-test () {
-  run test "$@"
-}
-
 # Starship prompt
 eval "$(starship init zsh)"
 
