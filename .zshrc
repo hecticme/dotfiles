@@ -72,9 +72,6 @@ lintf () {
   run lint --fix "$@"
 }
 
-# Starship prompt
-eval "$(starship init zsh)"
-
 #### ---------------------------------------
 # This is not included in my `.zshrc` anymore. But if I don't use Starship, here's how my prompt looks like:
 autoload -Uz vcs_info
