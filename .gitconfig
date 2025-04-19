@@ -6,6 +6,8 @@
   editor = vim
 [push]
   autoSetupRemote = true
+[rebase]
+  autoStash = true
 [init]
   defaultBranch = main
 [commit]
