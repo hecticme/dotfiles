@@ -20,7 +20,8 @@ alias gcme='git commit --allow-empty'
 alias gcma='git commit --amend'
 alias gcmea='git commit --allow-empty --amend'
 alias greset='git restore . && git clean -df'
-alias mouse='sudo modprobe -r hid_logitech_dj && sudo modprobe hid_logitech_dj'
+alias gcleanbr="git branch | grep -vE '^\*|main$|dev$' | xargs -n 1 git branch -D"
+alias gcleanbrsoft="git branch | grep -vE '^\*|main$|dev$' | xargs -n 1 git branch -d"
 alias src='source ~/.zshrc'
 
 # Functions
