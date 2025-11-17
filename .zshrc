@@ -9,6 +9,7 @@ alias gg='git log --graph --oneline --decorate --all'
 alias gfp='git fetch --prune'
 alias gtus='git status'
 alias gpr='git pull --rebase'
+alias gp='git push'
 alias gpo='git push origin'
 alias gpofwl='git push origin --force-with-lease'
 alias gbr='git branch'
@@ -75,15 +76,3 @@ lint () {
 lintf () {
   run lint --fix "$@"
 }
-
-#### ---------------------------------------
-# This is not included in my `.zshrc` anymore. But if I don't use Starship, here's how my prompt looks like:
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-zstyle ':vcs_info:git:*' formats ' (%b)'
-
-NEWLINE=$'\n'
-PROMPT='%B%F{blue}%1~%f%b via%F{yellow}%B${vcs_info_msg_0_}%b%f %F{green}%B@node $(node -v)%b%f %B%F{magenta}[%#]%f%b${NEWLINE}%B>%b '
-#### ---------------------------------------
