@@ -31,6 +31,10 @@ alias gcleanbrsoft="git branch | grep -vE '^\*|main$|dev$' | xargs -n 1 git bran
 alias src='source ~/.zshrc'
 
 # Functions
+gremake () {
+  git branch -D "$@" && git checkout -b "$@"
+}
+
 whatp () {
   if [[ -e "yarn.lock" ]]; then echo "yarn"
   elif [[ -e "pnpm-lock.yaml" ]]; then echo "pnpm"
