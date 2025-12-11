@@ -5,7 +5,8 @@ bindkey "^[[1;5D" backward-word
 # Aliases
 alias glog='git log'
 alias g1='git log --oneline'
-alias gg='git log --graph --oneline --decorate --exclude=refs/stash --all --format="%C(auto)%h%Creset%C(auto)%d%Creset %s %C(brightblack)- %aN%Creset"'
+alias gg='git log --graph --oneline --decorate --format="%C(auto)%h%Creset%C(auto)%d%Creset %s %C(brightblack)- %aN%Creset" --exclude=refs/stash'
+alias ga='git log --graph --oneline --decorate --format="%C(auto)%h%Creset%C(auto)%d%Creset %s %C(brightblack)- %aN%Creset" --exclude=refs/stash --all'
 alias gfp='git fetch --prune'
 alias gtus='git status'
 alias gpr='git pull --rebase'
