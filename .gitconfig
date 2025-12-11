@@ -12,3 +12,5 @@
   defaultBranch = main
 [commit]
   gpgsign = true
+[pager]
+  log = less -SFX
