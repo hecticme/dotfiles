@@ -82,3 +82,16 @@ lint () {
 lintf () {
   run lint --fix "$@"
 }
+
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+
+setopt prompt_subst
+
+zstyle ':vcs_info:git:*' formats ' (%b)'
+zstyle ':vcs_info:*' enable git
+
+NEWLINE=$'\n'
+
+PROMPT='%B%F{blue}%1~%f%b$([[ -n ${vcs_info_msg_0_} ]] && print -n " on%F{yellow}${vcs_info_msg_0_}%f") ${NEWLINE}%B>%b '
