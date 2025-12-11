@@ -84,14 +84,28 @@ lintf () {
 }
 
 autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
+
+precmd_vcs_info() {
+  vcs_info
+
+  ref_color="%F{green}"
+
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    if ! git symbolic-ref -q HEAD >/dev/null; then
+      vcs_info_msg_0_=$(git rev-parse --short HEAD 2>/dev/null)
+      ref_color="%F{yellow}"
+    fi
+  fi
+}
+
 precmd_functions+=( precmd_vcs_info )
 
 setopt prompt_subst
 
-zstyle ':vcs_info:git:*' formats ' (%b)'
-zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats '%b'
+zstyle ':vcs_info:git:*' actionformats '%b'
+zstyle ':vcs_info:git:*' detachedformats '%b'
 
 NEWLINE=$'\n'
 
-PROMPT='%B%F{blue}%1~%f%b$([[ -n ${vcs_info_msg_0_} ]] && print -n " on%F{yellow}${vcs_info_msg_0_}%f") ${NEWLINE}%B>%b '
+PROMPT='%B%F{blue}%1~%f%b$([[ -n ${vcs_info_msg_0_} ]] && print -n " on %B${ref_color}${vcs_info_msg_0_}%f%b")${NEWLINE}%B>%b '
