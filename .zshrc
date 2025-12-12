@@ -90,12 +90,42 @@ precmd_vcs_info() {
   vcs_info
 
   ref_color="%F{green}"
+  divergence_marker=""
 
-  if git rev-parse --is-inside-work-tree &>/dev/null; then
-    if ! git symbolic-ref -q HEAD >/dev/null; then
-      vcs_info_msg_0_=$(git rev-parse --short HEAD 2>/dev/null)
-      ref_color="%F{yellow}"
-    fi
+  git rev-parse --is-inside-work-tree &>/dev/null || return
+
+  if ! git symbolic-ref -q HEAD >/dev/null; then
+    vcs_info_msg_0_=$(git rev-parse --short HEAD 2>/dev/null)
+    ref_color="%F{yellow}"
+    return
+  fi
+
+  local upstream head_rev upstream_rev counts behind ahead
+
+  upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+
+  [[ -n $upstream ]] || return
+
+  head_rev=$(git rev-parse HEAD 2>/dev/null)
+  upstream_rev=$(git rev-parse "$upstream" 2>/dev/null)
+
+  [[ "$head_rev" == "$upstream_rev" ]] && return
+
+  counts=$(git rev-list --left-right --count "$upstream"...HEAD 2>/dev/null)
+
+  counts=${counts//$'\t'/ }
+
+  behind=${counts%% *}
+  ahead=${counts##* }
+  behind=${behind:-0}
+  ahead=${ahead:-0}
+
+  if (( ahead > 0 && behind > 0 )); then
+    divergence_marker=" %B%F{red}[!]%f%b"
+  elif (( ahead > 0 )); then
+    divergence_marker=" %B%F{red}[⇡]%f%b"
+  elif (( behind > 0 )); then
+    divergence_marker=" %B%F{red}[⇣]%f%b"
   fi
 }
 
@@ -109,4 +139,4 @@ zstyle ':vcs_info:git:*' detachedformats '%b'
 
 NEWLINE=$'\n'
 
-PROMPT='%B%F{blue}%1~%f%b$([[ -n ${vcs_info_msg_0_} ]] && print -n " on %B${ref_color}${vcs_info_msg_0_}%f%b")${NEWLINE}%B>%b '
+PROMPT='%B%F{blue}%1~%f%b$([[ -n ${vcs_info_msg_0_} ]] && print -n " on %B${ref_color}${vcs_info_msg_0_}%f%b${divergence_marker}")${NEWLINE}%B>%b '
