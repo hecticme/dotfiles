@@ -81,6 +81,7 @@ lintf () {
 }
 
 autoload -Uz vcs_info
+autoload -Uz compinit && compinit
 
 precmd_vcs_info() {
   vcs_info
