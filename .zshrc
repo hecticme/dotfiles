@@ -29,6 +29,7 @@ alias gcmea='git commit --allow-empty --amend'
 alias greset='git restore . && git clean -df'
 alias gcleanbr="git branch | grep -vE '^\*|main$|dev$' | xargs -n 1 git branch -D"
 alias gcleanbrsoft="git branch | grep -vE '^\*|main$|dev$' | xargs -n 1 git branch -d"
+alias checkport="lsof -nP -iTCP -sTCP:LISTEN"
 alias src='source ~/.zshrc'
 
 # Functions
